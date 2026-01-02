@@ -1,89 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的在线歌单</title>
+    <title>我的音乐播放列表</title>
     <style>
         body {
-            background-color: #222; /* 黑色背景 */
-            color: white;
-            text-align: center;
-            font-family: sans-serif;
-            padding: 50px 20px;
-        }
-        h1 { margin-bottom: 30px; }
-        
-        /* 播放器的样式 */
-        audio {
-            width: 90%;
-            max-width: 500px;
-            margin-bottom: 40px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-        }
-
-        /* 按钮容器的样式 */
-        .playlist {
+            background-color: #1a1a1a; /* 深灰黑色背景 */
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px; /* 按钮之间的间距 */
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
 
-        /* 每一首歌的按钮样式 */
+        h1 {
+            margin-top: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* 播放器主体 */
+        audio {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px 0;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        /* 歌单容器 */
+        .playlist {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* 按钮样式 */
         .song-btn {
-            background-color: #444;
-            color: white;
-            border: 1px solid #666;
-            padding: 15px 30px;
-            width: 80%;
-            max-width: 400px;
+            background: linear-gradient(145deg, #2a2a2a, #333);
+            color: #fff;
+            border: 1px solid #444;
+            padding: 15px 20px;
+            border-radius: 12px;
             cursor: pointer;
-            border-radius: 10px;
+            text-align: left;
             font-size: 16px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .song-btn:hover {
-            background-color: #666; /* 鼠标放上去变色 */
-            transform: scale(1.05); /* 稍微放大一点 */
+            background: #444;
+            transform: translateX(5px); /* 鼠标悬停时轻微右移 */
+            border-color: #666;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .song-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* 正在播放的标记（可选装饰） */
+        .icon {
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+        
+        footer {
+            margin-top: 50px;
+            font-size: 12px;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
-    <h1>🎧 Gemini桑的精选歌单</h1>
+    <h1>🎧 精选曲目播放</h1>
 
-    <audio id="myAudio" controls>
-        <source src="./music.mp3" type="audio/mpeg">
+    <audio id="audioPlayer" controls>
+        <source src="https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/%E8%91%AC%E7%94%9F%E8%8A%B1.mp3" type="audio/mpeg">
         您的浏览器不支持音频播放。
     </audio>
 
     <div class="playlist">
-        <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/No%20Matter%20What%20You%20Look%20Like.mp3')">
-             No matter What You Look Like
+        <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/%E8%91%AC%E7%94%9F%E8%8A%B1.mp3')">
+            <span>🌸 葬生花</span>
+            <span class="icon">▶</span>
         </button>
 
-        <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/The%20Invoice%20of%20Breathing.mp3')">
-             The Invoice of Breathing
+        <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/%E8%8B%A5%E6%88%91%E6%8B%A5%E6%9C%89%E4%BA%86%E7%BE%8E.mp3')">
+            <span>✨ 若我拥有了美</span>
+            <span class="icon">▶</span>
         </button>
 
         <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/%E5%A5%94%E5%90%91%E6%81%B6%E4%B9%8B%E5%8D%8E%20(1).mp3')">
-             奔向恶之华
+            <span>🥀 奔向恶之华</span>
+            <span class="icon">▶</span>
         </button>
-        
-         <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/%E8%8B%A5%E6%88%91%E6%8B%A5%E6%9C%89%E4%BA%86%E7%BE%8E.mp3')">
-             若我拥有了美
+
+        <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/The%20Invoice%20of%20Breathing.mp3')">
+            <span>💨 The Invoice of Breathing</span>
+            <span class="icon">▶</span>
+        </button>
+
+        <button class="song-btn" onclick="playSong('https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/No%20Matter%20What%20You%20Look%20Like.mp3')">
+            <span>👀 No Matter What You Look Like</span>
+            <span class="icon">▶</span>
         </button>
     </div>
 
+    <footer>Created with GitHub Pages</footer>
+
     <script>
-        // 这里是控制切换歌曲的魔法脚本
-        function playSong(fileName) {
-            var audio = document.getElementById('myAudio');
-            audio.src = fileName; // 切换源文件
-            audio.play();         // 自动开始播放
+        function playSong(url) {
+            var player = document.getElementById('audioPlayer');
+            // 如果当前已经在播放这首歌，就不要重新加载，避免卡顿
+            if (player.src !== url) {
+                player.src = url;
+                player.play(); // 切换并自动播放
+            } else {
+                // 如果是同一首歌，点击则切换 播放/暂停
+                if (player.paused) {
+                    player.play();
+                } else {
+                    player.pause();
+                }
+            }
         }
     </script>
 
