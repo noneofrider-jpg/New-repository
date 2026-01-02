@@ -2,28 +2,86 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>神秘的背景音乐</title> <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的在线歌单</title>
+    <style>
         body {
-            background-color: #222; /* 黑色背景，更有氛围 */
+            background-color: #222; /* 黑色背景 */
             color: white;
             text-align: center;
-            padding-top: 100px;
             font-family: sans-serif;
+            padding: 50px 20px;
         }
+        h1 { margin-bottom: 30px; }
+        
+        /* 播放器的样式 */
         audio {
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+        }
+
+        /* 按钮容器的样式 */
+        .playlist {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* 按钮之间的间距 */
+        }
+
+        /* 每一首歌的按钮样式 */
+        .song-btn {
+            background-color: #444;
+            color: white;
+            border: 1px solid #666;
+            padding: 15px 30px;
             width: 80%;
-            margin-top: 20px;
+            max-width: 400px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .song-btn:hover {
+            background-color: #666; /* 鼠标放上去变色 */
+            transform: scale(1.05); /* 稍微放大一点 */
         }
     </style>
 </head>
 <body>
 
-    <h1>🎧 点击播放来自异世界的音乐</h1>
-    
-    <audio controls>
-        <source src="https://github.com/noneofrider-jpg/New-repository/raw/refs/heads/main/%E8%91%AC%E7%94%9F%E8%8A%B1.mp3">
+    <h1>🎧 Gemini桑的精选歌单</h1>
+
+    <audio id="myAudio" controls>
+        <source src="./music.mp3" type="audio/mpeg">
         您的浏览器不支持音频播放。
     </audio>
+
+    <div class="playlist">
+        <button class="song-btn" onclick="playSong('./music.mp3')">
+            🎵 播放第一首：神秘背景音
+        </button>
+
+        <button class="song-btn" onclick="playSong('./song2.mp3')">
+            🎸 播放第二首：激昂的战斗曲
+        </button>
+
+        <button class="song-btn" onclick="playSong('./song3.mp3')">
+            🎹 播放第三首：悲伤的钢琴曲
+        </button>
+    </div>
+
+    <script>
+        // 这里是控制切换歌曲的魔法脚本
+        function playSong(fileName) {
+            var audio = document.getElementById('myAudio');
+            audio.src = fileName; // 切换源文件
+            audio.play();         // 自动开始播放
+        }
+    </script>
 
 </body>
 </html>
